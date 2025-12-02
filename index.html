@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lindy Hop Metronome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lindy Hop Metronome</h1>
+        <p class="subtitle">Rhythm and Syncopation Practice</p>
+
+        <!-- Control Group -->
+        <div class="control-group">
+            <div class="control-row">
+                <label for="tempoSlider">Tempo</label>
+                <div class="tempo-control">
+                    <input type="range" id="tempoSlider" min="45" max="110" value="60">
+                    <div class="tempo-display" id="tempoBPM">120 BPM</div>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <label>Mode</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" data-mode="8">8-Count</button>
+                    <button class="toggle-btn" data-mode="6">6-Count</button>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <label>Swing</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" data-swing="light">Light</button>
+                    <button class="toggle-btn" data-swing="medium">Medium</button>
+                    <button class="toggle-btn" data-swing="hard">Hard</button>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <label style="position: relative; display: inline-flex; align-items: center; gap: 6px; cursor: help;" data-tooltip="Accents all downbeats even if not selected in pattern">Base Pulse <span style="font-weight: 600; color: var(--color-primary);">ⓘ</span></label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" data-pulse="on">On</button>
+                    <button class="toggle-btn" data-pulse="off">Off</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transport Controls -->
+        <div class="transport">
+            <button class="btn-primary" id="playBtn">Play</button>
+            <button class="btn-secondary" id="stopBtn">Stop</button>
+        </div>
+
+        <!-- Pattern Grid -->
+        <div class="grid-section">
+            <div class="grid-title">Pattern</div>
+            <div class="pattern-grid" id="patternGrid"></div>
+        </div>
+
+        <!-- Presets & Actions -->
+        <div class="presets-section">
+            <select id="presetSelect">
+                <option value="">Select a preset...</option>
+                <option value="basic8">Basic 8-Count</option>
+                <option value="basic6">Basic 6-Count</option>
+                <option value="basicCharleston">Basic Charleston</option>
+            </select>
+            <div class="actions">
+                <button class="btn-action btn-secondary btn-small" id="randomizeBtn">Randomize</button>
+                <button class="btn-action btn-secondary btn-small" id="clearBtn">Clear</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div style="margin-top: var(--space-16);">
+                <button id="teachingModeBtn" style="background: none; border: none; color: var(--color-primary); font-size: 12px; text-decoration: underline; cursor: pointer; padding: 0; font-weight: 500;" onclick="randomizePattern(); return false;">Full Screen Mode</button>
+            </div>
+        </div>
+    </div>        <!-- Teaching Mode Modal -->
+        <div class="teaching-modal" id="teachingModal">
+            <div class="teaching-modal-content">
+                <div class="teaching-modal-grid" id="teachingGrid"></div>
+                <div style="display: flex; gap: var(--space-12); justify-content: center; margin-top: var(--space-24);">
+                    <button class="btn-primary" id="teachingPlayBtn">Play</button>
+                    <button class="btn-secondary" id="teachingStopBtn">Stop</button>
+                </div>
+                <button id="teachingCloseBtn" style="background: none; border: none; color: var(--color-text-secondary); font-size: 12px; text-decoration: underline; cursor: pointer; padding: 0; font-weight: 500; margin-top: var(--space-24);">Close</button>
+            </div>
+        </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
