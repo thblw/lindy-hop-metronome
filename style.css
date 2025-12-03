@@ -276,9 +276,8 @@ label[data-tooltip] {
 label[data-tooltip]:hover::after {
     content: attr(data-tooltip);
     position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    top: -50%;
+    transform: translateY(-100%);
     background-color: var(--color-text);
     color: var(--color-surface);
     padding: var(--space-8) var(--space-12);
@@ -290,18 +289,17 @@ label[data-tooltip]:hover::after {
     font-weight: normal;
     text-transform: none;
     letter-spacing: normal;
-    margin-left: var(--space-8);
 }
 
 label[data-tooltip]:hover::before {
     content: '';
     position: absolute;
-    left: 95%;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 25%;
+    top: -50%;
     border: 5px solid transparent;
     border-right-color: var(--color-text);
     z-index: 1000;
+    transform: rotate(-90deg);
 }
 
 /* Pattern Grid */
