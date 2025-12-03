@@ -7,7 +7,7 @@ const state = {
     mode: '8',
     pattern: [],
     tempo: 140,
-    swingMode: 'light',
+    swingMode: 'medium',
     basePulseOn: true,
     isPlaying: false,
     currentBeat: -1,
@@ -156,6 +156,10 @@ function setupEventListeners() {
             const index = parseInt(item.dataset.index);
             state.pattern[index] = !state.pattern[index];
             renderGrid();
+
+            // Deselect preset (go back to placeholder)
+            const presetSelect = document.getElementById('presetSelect');
+            presetSelect.selectedIndex = 0; // assumes first option is "Select a preset..."
         }
     });
 

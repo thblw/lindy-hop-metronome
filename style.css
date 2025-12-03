@@ -57,7 +57,7 @@ html {
 
 body {
     margin: 0;
-    padding: var(--space-16);
+    /* padding: var(--space-16); */
     background-color: var(--color-background);
     min-height: 100vh;
     display: flex;
@@ -254,6 +254,7 @@ button:disabled {
     color: var(--color-text-secondary);
     cursor: pointer;
     transition: all var(--duration-fast);
+    white-space: nowrap;
 }
 
 .toggle-btn.active {
@@ -520,7 +521,7 @@ select:focus {
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .container {
         padding: var(--space-16);
         border-radius: 0;
