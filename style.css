@@ -269,13 +269,17 @@ button:disabled {
 }
 
 /* Tooltip */
-label[data-tooltip] {
+/* div[data-tooltip] div[data-tooltip]:hover::after div[data-tooltip]:hover::before */
+label[data-tooltip],
+div[data-tooltip] {
     position: relative;
 }
 
-label[data-tooltip]:hover::after {
+label[data-tooltip]:hover::after,
+div[data-tooltip]:hover::after {
     content: attr(data-tooltip);
     position: absolute;
+    left: 0;
     top: -50%;
     transform: translateY(-100%);
     background-color: var(--color-text);
@@ -291,11 +295,12 @@ label[data-tooltip]:hover::after {
     letter-spacing: normal;
 }
 
-label[data-tooltip]:hover::before {
+label[data-tooltip]:hover::before,
+div[data-tooltip]:hover::before {
     content: '';
     position: absolute;
-    left: 25%;
-    top: -50%;
+    left: 10%;
+    top: -52%;
     border: 5px solid transparent;
     border-right-color: var(--color-text);
     z-index: 1000;
