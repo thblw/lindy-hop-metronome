@@ -414,6 +414,11 @@ function toggleTeachingMode() {
 window.addEventListener('DOMContentLoaded', () => {
     init();
 
+    // Select a preset on load
+    const presetSelect = document.getElementById('presetSelect');
+    presetSelect.value = 'basic8';    // value attribute of the <option>
+    presetSelect.dispatchEvent(new Event('change')); // apply its pattern & tempo
+
     document.getElementById('teachingModeBtn').addEventListener('click', toggleTeachingMode);
     document.getElementById('teachingCloseBtn').addEventListener('click', toggleTeachingMode);
 

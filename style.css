@@ -269,7 +269,6 @@ button:disabled {
 }
 
 /* Tooltip */
-/* div[data-tooltip] div[data-tooltip]:hover::after div[data-tooltip]:hover::before */
 label[data-tooltip],
 div[data-tooltip] {
     position: relative;
