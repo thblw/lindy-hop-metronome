@@ -47,6 +47,13 @@ const presets = {
         tempo: 80,
         accents: [false, true, false, true, false, true, false, false, false, true, false, false, false, true, false, false]
         // Charleston pattern: boxes 1, 3, 5, 7, 9, 13
+    },
+    miniDip: {
+        mode: '6',
+        name: 'Mini Dip',
+        tempo: 60,
+        accents: [false, true, false, true, false, true, true, false, false, false, true, true]
+        // Mini d pattern: boxes 1, 3, 5, 7, 9, 13
     }
 };
 
@@ -298,22 +305,31 @@ function scheduleNote(time) {
         shouldBeAccent = false;
     }
 
-    if (shouldPlayClick) {
-        // Calculate actual time with swing (only for off-beats)
-        let scheduleTime = time;
-        if (isOffBeat) {
-            const swingRatio = swingRatios[state.swingMode];
-            // For swing, delay the off-beat based on swing ratio
-            const swingDelay = ((swingRatio - 1) / (swingRatio + 1)) * beatDuration * 2;
-            scheduleTime = time + swingDelay;
-        }
+    // Base schedule time (grid position time)
+    let scheduleTime = time;
 
+    // Apply swing to off-beats for BOTH sound and highlight
+    if (shouldPlayClick && isOffBeat) {
+        const swingRatio = swingRatios[state.swingMode];  // light/medium/hard
+        const swingDelay = ((swingRatio - 1) / (swingRatio + 1)) * beatDuration * 2;
+        scheduleTime = time + swingDelay;
+    }
+
+    if (shouldPlayClick) {
+        // Audio at swung scheduleTime
         playClick(scheduleTime, shouldBeAccent);
     }
 
-    // Update UI immediately for visual feedback
-    updateGridHighlight();
-    // Update current beat for next iteration
+    // VISUAL: swing the highlight to same scheduleTime
+    const uiDelayMs = Math.max(0, (scheduleTime - audioContext.currentTime) * 1000);
+    const uiBeatIndex = beatInPattern; // capture now for the timeout
+
+    setTimeout(() => {
+        // optional: use a separate UI beat counter
+        state.currentBeatForUI = uiBeatIndex;
+        updateGridHighlight();
+    }, uiDelayMs);
+
     state.currentBeat++;
 }
 
@@ -348,14 +364,12 @@ function playClick(time, isAccent) {
 }
 
 function updateGridHighlight() {
-    const beatInPattern = state.currentBeat % state.pattern.length;
+    const beatInPattern = (state.currentBeatForUI ?? state.currentBeat) % state.pattern.length;
     const items = document.querySelectorAll('.grid-item');
+
     items.forEach((item, index) => {
         item.classList.toggle('playing', index === beatInPattern);
-    });
-    const teachingItems = document.querySelectorAll('.teaching-grid-item');
-    teachingItems.forEach((item, index) => {
-        item.classList.toggle('playing', index === beatInPattern);
+        // or your more advanced pulse/accents logic from before
     });
 }
 

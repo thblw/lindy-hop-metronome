@@ -342,7 +342,6 @@ div[data-tooltip]:hover::before {
     align-items: center;
     justify-content: center;
     transition: all var(--duration-fast);
-    font-size: 16px;
     font-weight: 500;
     color: var(--color-text-secondary);
     position: relative;
@@ -366,7 +365,8 @@ div[data-tooltip]:hover::before {
 }
 
 .grid-item.playing {
-    box-shadow: inset 0 0 0 3px var(--color-primary);
+    /* box-shadow: inset 0 0 0 3px var(--color-primary); */
+    filter: brightness(1.5) saturate(1.2);
     animation: pulse 0.2s ease-out;
 }
 
@@ -381,7 +381,7 @@ div[data-tooltip]:hover::before {
 }
 
 .grid-label {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.3px;
 }
@@ -558,9 +558,12 @@ select:focus {
     }
 
     .grid-item {
-        font-size: 16px;
         min-width: 45px;
         min-height: 45px;
+    }
+
+    .grid-label{
+        font-size: 24px;
     }
 
     .pattern-grid {
